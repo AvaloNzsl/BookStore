@@ -1,0 +1,16 @@
+﻿@using BookStore.Model
+@model IEnumerable<Book>
+
+@{
+    ViewBag.Title = "Books";
+}
+
+@foreach (Book book in Model)
+{
+    <div>
+        <h3>@book.Name - @book.Author</h3>
+        <p>@book.Description</p>
+        <h4>@book.Price.ToString("# бел. руб.")</h4>
+    </div>
+    <hr />
+}
