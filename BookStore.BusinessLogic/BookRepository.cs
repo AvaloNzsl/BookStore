@@ -10,6 +10,7 @@ namespace BookStore.BusinessLogic
     public class BookRepository : IBookRepository
     {
         EFBookStoreContext _bsContext = new EFBookStoreContext();
+
         public IEnumerable<BookDTO> Books
         {
             get {

@@ -1,11 +1,11 @@
 ﻿@using BookStore.Model
-@model IEnumerable<Book>
+@model BooksListViewModel
 
 @{
     ViewBag.Title = "Books";
 }
 
-@foreach (Book book in Model)
+@foreach (var book in Model.Books)
 {
     <div>
         <h3>@book.Name - @book.Author</h3>
@@ -14,3 +14,7 @@
     </div>
     <hr />
 }
+
+<div>
+    @Html.PageLinks(Model.PageInfo, x=> Url.Action("List", new { page = x }))
+</div>
