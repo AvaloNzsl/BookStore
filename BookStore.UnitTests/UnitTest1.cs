@@ -35,7 +35,7 @@ namespace BookStore.UnitTests
             BooksController controller = new BooksController(mock.Object);
             controller.pageSize = 3;
 
-            BooksListViewModel result = (BooksListViewModel)controller.List(2).Model;
+            BooksListViewModel result = (BooksListViewModel)controller.List(null, 2).Model;
 
             List<Book> books = result.Books.ToList();
 
@@ -86,7 +86,7 @@ namespace BookStore.UnitTests
             controller.pageSize = 3;
 
             // Action
-            BooksListViewModel result = (BooksListViewModel)controller.List(2).Model;
+            BooksListViewModel result = (BooksListViewModel)controller.List(null, 2).Model;
 
             // Asserts
             PageInfo _pageInfo = result.PageInfo;
@@ -94,6 +94,34 @@ namespace BookStore.UnitTests
             Assert.AreEqual(_pageInfo.ItemsPerPage, 3);
             Assert.AreEqual(_pageInfo.TotalItems, 7);
             Assert.AreEqual(_pageInfo.TotalPages, 3);
+        }
+
+        [TestMethod]
+        public void CanFilterBooks()
+        {
+            // Arrange
+            Mock<IBookRepository> mock = new Mock<IBookRepository>();
+
+            mock.Setup(m => m.Books).Returns(new List<BookDTO> {
+                    new BookDTO { BookId = 1, Name = "Book_1" , Genre = "Genre1"},
+                    new BookDTO { BookId = 2, Name = "Book_2" , Genre = "Genre2"},
+                    new BookDTO { BookId = 3, Name = "Book_3" , Genre = "Genre3"},
+                    new BookDTO { BookId = 4, Name = "Book_4" , Genre = "Genre4"},
+                    new BookDTO { BookId = 5, Name = "Book_5" , Genre = "Genre5"},
+                    new BookDTO { BookId = 6, Name = "Book_6" , Genre = "Genre6"},
+                    new BookDTO { BookId = 7, Name = "Book_7" , Genre = "Genre2"}
+                });
+
+            BooksController controller = new BooksController(mock.Object);
+            controller.pageSize = 3;
+
+            // Action
+            List<Book> result = ((BooksListViewModel)controller.List("Genre2", 1).Model).Books.ToList();
+
+            // Asserts
+            Assert.AreEqual(result.Count, 2);
+            Assert.IsTrue(result[0].Name == "Book_2" && result[0].Genre == "Genre2");
+            Assert.IsTrue(result[1].Name == "Book_7" && result[0].Genre == "Genre2");
         }
     }
 }

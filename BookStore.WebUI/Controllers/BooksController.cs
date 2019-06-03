@@ -17,7 +17,7 @@ namespace BookStore.WebUI.Controllers
 
         public BooksController(IBookRepository repository) => _bookRepository = repository;
 
-        public ViewResult List(int page = 1)
+        public ViewResult List(string genre, int page = 1)
         {
             IEnumerable<BookDTO> booksDto = _bookRepository.Books;
 
@@ -26,7 +26,9 @@ namespace BookStore.WebUI.Controllers
 
             BooksListViewModel model = new BooksListViewModel
             {
-                Books = books.OrderBy( b => b.BookId )
+                Books = books
+                .Where( b=> genre == null || b.Genre == genre)
+                .OrderBy( b => b.BookId )
                 .Skip((page -1)*pageSize)
                 .Take(pageSize),
 
@@ -35,7 +37,8 @@ namespace BookStore.WebUI.Controllers
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
                     TotalItems = _bookRepository.Books.Count()
-                }                
+                },
+                CurrentGenre = genre
             };
 
             return View(model);

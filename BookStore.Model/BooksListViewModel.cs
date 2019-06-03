@@ -6,5 +6,7 @@ namespace BookStore.Model
     {
         public IEnumerable<Book> Books { get; set; }
         public PageInfo PageInfo { get; set; }
+
+        public string CurrentGenre { get; set; }
     }
 }
