@@ -36,7 +36,9 @@ namespace BookStore.WebUI.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
-                    TotalItems = _bookRepository.Books.Count()
+                    TotalItems = genre == null ?                                            //If -> there is selected category
+                        _bookRepository.Books.Count() :                                     //return -> the number of items in this category(genre)
+                        _bookRepository.Books.Where(book => book.Genre == genre).Count()    //else -> the total quantity of goods
                 },
                 CurrentGenre = genre
             };
