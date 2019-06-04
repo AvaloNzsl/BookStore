@@ -13,27 +13,16 @@ namespace BookStore.WebUI.Controllers
         private IBookRepository _bookRepository;
         public CartController(IBookRepository repository) => _bookRepository = repository;
 
-        public ViewResult Index(string returnUrl)
+        public ViewResult Index(CartDTO cart, string returnUrl)
         {
             return View(new CartViewModel
             {
-                Cart = GetCart(),
+                Cart = cart,
                 ReturnUrl = returnUrl
             });
         }
 
-        public CartDTO GetCart()
-        {
-            CartDTO cart = (CartDTO)Session["Cart"];
-            if (cart == null)
-            {
-                cart = new CartDTO();
-                Session["Cart"] = cart;
-            }
-            return cart;
-        }
-
-        public RedirectToRouteResult AddToCart(int bookId, string returnUrl)
+        public RedirectToRouteResult AddToCart(CartDTO cart, int bookId, string returnUrl)
         {
             BookDTO _bookDto = _bookRepository.Books
                 .FirstOrDefault(b => b.BookId == bookId);
@@ -42,13 +31,13 @@ namespace BookStore.WebUI.Controllers
 
             if (_bookDto != null)
             {
-                GetCart().AddItem(bookDB, 1);
+                cart.AddItem(bookDB, 1);
             }
 
             return RedirectToAction("Index",new { returnUrl });
         }
 
-        public RedirectToRouteResult RemoveFromCart(int bookId, string returnUrl)
+        public RedirectToRouteResult RemoveFromCart(CartDTO cart, int bookId, string returnUrl)
         {
             BookDTO _bookDto = _bookRepository.Books
                 .FirstOrDefault(b => b.BookId == bookId);
@@ -56,10 +45,15 @@ namespace BookStore.WebUI.Controllers
 
             if (_bookDto != null)
             {
-                GetCart().RemoveLine(bookDB);
+                cart.RemoveLine(bookDB);
             }
 
             return RedirectToAction("Index", new { returnUrl });
+        }
+
+        public PartialViewResult Summary(CartDTO cart)
+        {
+            return PartialView(cart);
         }
     }
 }
