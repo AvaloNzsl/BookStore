@@ -14,7 +14,7 @@ using Moq;
 namespace BookStore.UnitTests
 {
     [TestClass]
-    public class UnitTest1
+    public class BookStoreTest
     {
         [TestMethod]
         public void Can_PageInt()

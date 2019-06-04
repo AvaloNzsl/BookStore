@@ -171,6 +171,7 @@
     <Compile Include="App_Start\Ninject.Web.Common.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BooksController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -198,6 +199,7 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Views\Shared\_BookSummary.cshtml" />
     <Content Include="Views\Navigation\Menu.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -213,6 +215,10 @@
     <ProjectReference Include="..\BookStore.BusinessLogic\BookStore.BusinessLogic.csproj">
       <Project>{4ac05980-cecd-4e50-85d9-3cb0007a0115}</Project>
       <Name>BookStore.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BookStore.DataAccessLayer\BookStore.DataAccessLayer.csproj">
+      <Project>{7cefea83-02d0-4c2d-abc7-0b3f77d33b49}</Project>
+      <Name>BookStore.DataAccessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\BookStore.Model\BookStore.Model.csproj">
       <Project>{f75b8211-6dd5-49d2-bd03-d23a87675a27}</Project>

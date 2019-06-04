@@ -8,5 +8,6 @@ namespace BookStore.BusinessLogic.Repository
     {
         IEnumerable<BookDTO> Books { get; }
 
+        Book MapConfig(BookDTO _bookDto);
     }
 }

@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="BookRepository.cs" />
     <Compile Include="DataTransferObject\BookDTO.cs" />
+    <Compile Include="DataTransferObject\CartDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IBookRepository.cs" />
   </ItemGroup>

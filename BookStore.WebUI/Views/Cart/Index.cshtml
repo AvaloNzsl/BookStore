@@ -1,0 +1,42 @@
+﻿@model BookStore.Model.CartViewModel
+
+@{
+    ViewBag.Title = "BookStore at the Fireplace: Your shopping cart";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-center">Quantity:   </th>
+            <th class="text-left">Name:   </th>
+            <th class="text-right">Price:  </th>
+            <th class="text-right">Total:  </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach( var line in Model.Cart.Lines)
+        {
+            <tr>
+                <th class="text-center">@line.Quantity:   </th>
+                <th class="text-left">@line.Book.Name - @line.Book.Author:   </th>
+                <th class="text-right">@line.Book.Price.ToString("US $# ")</th>
+                <th class="text-right">@((line.Quantity * line.Book.Price).ToString("US $#"))</th>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total:  </td>
+            <td class="text-right">
+                @Model.Cart.TotalValue().ToString("US $#")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="text-center">
+    <a class="btn btn-primary" href="@Model.ReturnUrl">Continue shopping</a>
+</div>
+

@@ -9,13 +9,23 @@ namespace BookStore.BusinessLogic
 {
     public class BookRepository : IBookRepository
     {
+        private Book _bookDB = new Book();
         EFBookStoreContext _bsContext = new EFBookStoreContext();
 
         public IEnumerable<BookDTO> Books
         {
-            get {
+            get
+            {
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Book, BookDTO>()).CreateMapper();
-                return mapper.Map<IEnumerable<Book>, List<BookDTO>>(_bsContext.Books);  }
+                return mapper.Map<IEnumerable<Book>, List<BookDTO>>(_bsContext.Books);
+            }
+        }
+
+        public Book MapConfig(BookDTO _bookDto)
+        {
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();
+            return _bookDB = mapper.Map<BookDTO, Book>(_bookDto);
         }
     }
 }

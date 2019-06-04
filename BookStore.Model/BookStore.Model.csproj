@@ -64,11 +64,18 @@
   <ItemGroup>
     <Compile Include="Book.cs" />
     <Compile Include="BooksListViewModel.cs" />
+    <Compile Include="CartViewModel.cs" />
     <Compile Include="PageInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BookStore.BusinessLogic\BookStore.BusinessLogic.csproj">
+      <Project>{4AC05980-CECD-4E50-85D9-3CB0007A0115}</Project>
+      <Name>BookStore.BusinessLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
