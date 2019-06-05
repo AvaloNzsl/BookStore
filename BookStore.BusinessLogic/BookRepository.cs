@@ -23,7 +23,6 @@ namespace BookStore.BusinessLogic
 
         public Book MapConfig(BookDTO _bookDto)
         {
-
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();
             return _bookDB = mapper.Map<BookDTO, Book>(_bookDto);
         }

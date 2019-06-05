@@ -17,7 +17,7 @@ namespace BookStore.UnitTests
     public class BookStoreTest
     {
         [TestMethod]
-        public void Can_PageInt()
+        public void CanPageInt()
         {
             //имитация хранилища
             Mock<IBookRepository> mock = new Mock<IBookRepository>();
