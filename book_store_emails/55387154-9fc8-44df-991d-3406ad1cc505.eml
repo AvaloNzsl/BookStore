@@ -1,0 +1,15 @@
+X-Sender: bookstore@fireplace.com
+X-Receiver: orders@fireplace.com
+MIME-Version: 1.0
+From: bookstore@fireplace.com
+To: orders@fireplace.com
+Date: 5 Jun 2019 10:48:56 +0300
+Subject: New order has been sent
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: base64
+
+TmV3IG9yZGVyIHByb2Nlc3NlZA0KfHx8fHx8fHx8fHx8fHx8fHx8fA0KR29vZHM6IA0K
+MSB4INCa0L3QuNCz0LAgMSAodG90YWw6IDjCoDgwOCwwMCDigr1Ub3RhbCBjb3N0OiA4
+wqA4MDgsMDAg4oK9fHx8fHx8fHx8fHx8fHx8fHx8fA0KRGVsaXZlcnkNCkF2YWxvbg0K
+TmVtaWdhDQoNCk1pbnNrDQpCZWxhcnVzDQp8fHx8fHx8fHx8fHx8fHx8fHx8DQpHaWZ0
+IFdyYXA6IFllcw==
