@@ -1,0 +1,41 @@
+﻿@model BookStore.Model.Book
+
+@{
+    ViewBag.Title = "Admin panel: Book editor ";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="panel">
+    <div class="panel-heading">
+        <h2>Editing a book @Model.Name</h2>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        <div class="panel-body">
+            @Html.HiddenFor(m => m.BookId)
+            @foreach (var property in ViewData.ModelMetadata.Properties)
+            {
+                if (property.PropertyName != "BookId")
+                {
+                    <div class="form-group">
+                        <label>@(property.DisplayName ?? property.PropertyName)</label>
+                        @if (property.PropertyName == "Description")
+                        {
+                            @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 5 })
+                        }
+                        else
+                        {
+                            @Html.TextArea(property.PropertyName, null, new { @class = "form-control" })
+                        }
+                    </div>
+                }
+            }
+        </div>
+
+
+        <div class="panel-footer">
+            <input type="submit" value="Save" class="btn btn-primary"/>
+            @Html.ActionLink("Cancel", "AdminPanel", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

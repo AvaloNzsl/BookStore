@@ -24,5 +24,14 @@ namespace BookStore.WebUI.Controllers
 
             return View(books);
         }
+
+        public ViewResult Edit(int bookId)
+        {
+            //BookDTO _bookDto = _bookRepository.Books.Where(b => b.BookId == bookId).FirstOrDefault();
+            //var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();
+            //var _bookDB = mapper.Map<BookDTO, Book>(_bookDto);
+
+            return View(5);
+        }
     }
 }

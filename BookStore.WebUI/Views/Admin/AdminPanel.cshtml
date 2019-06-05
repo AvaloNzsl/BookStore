@@ -34,7 +34,7 @@
             {
             <tr>
                 <td class="text-right">
-                    @Html.DisplayFor(modelItem => item.BookId)
+                    @item.BookId
                 </td>
                 <td>
                     @Html.ActionLink(item.Name, "Edit", new { item.BookId } )
@@ -43,7 +43,7 @@
                     @Html.DisplayFor(modelItem => item.Author)
                 </td>
                 <td class="text-right">
-                    @item.Price.ToString("$#")
+                    @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td class="text-center">
                     @using(Html.BeginForm("Delete", "Admin"))

@@ -21,10 +21,35 @@ namespace BookStore.BusinessLogic
             }
         }
 
+        public void AddBook(BookDTO book)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DeleteBook(int bookId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void EditBook(BookDTO book)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public BookDTO GetBookById(int bookId)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Book MapConfig(BookDTO _bookDto)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();
             return _bookDB = mapper.Map<BookDTO, Book>(_bookDto);
+        }
+
+        public void Save()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
