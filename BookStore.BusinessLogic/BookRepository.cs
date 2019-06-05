@@ -33,7 +33,24 @@ namespace BookStore.BusinessLogic
 
         public void EditBook(BookDTO book)
         {
-            throw new System.NotImplementedException();
+            var bookDB = MapConfig(book);
+
+            if (book.BookId == 0)
+            {
+                _bsContext.Books.Add(bookDB);
+            }
+            else
+            {
+                Book dbEntry = _bsContext.Books.Find(bookDB.BookId);
+                if (dbEntry != null)
+                {
+                    dbEntry.Name = bookDB.Name;
+                    dbEntry.Author = bookDB.Author;
+                    dbEntry.Description = bookDB.Description;
+                    dbEntry.Genre = bookDB.Genre;
+                    dbEntry.Price = bookDB.Price;
+                }
+            }
         }
 
         public BookDTO GetBookById(int bookId)
@@ -49,7 +66,7 @@ namespace BookStore.BusinessLogic
 
         public void Save()
         {
-            throw new System.NotImplementedException();
+            _bsContext.SaveChanges();
         }
     }
 }
