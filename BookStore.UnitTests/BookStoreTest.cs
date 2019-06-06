@@ -214,5 +214,27 @@ namespace BookStore.UnitTests
             Assert.AreEqual(res_All, 7);
 
         }
+
+        [TestMethod]
+        public void CanRetrieveImageDataAndForInvalidID()
+        {
+            //arrange
+            Mock<IBookRepository> mock = new Mock<IBookRepository>();
+            mock.Setup(m => m.Books).Returns(new List<BookDTO> {
+                new BookDTO { BookId = 1, Name = "Book_1", ImageData = new byte[] { }, ImageMimeType = "image/png" }
+            });
+
+            BooksController controller = new BooksController(mock.Object);
+
+            //action
+            ActionResult result_NotNull = controller.GetImage(1);
+            ActionResult result_IsNull = controller.GetImage(90);
+
+            //Asserts
+            Assert.IsNotNull(result_NotNull);
+            Assert.IsInstanceOfType(result_NotNull, typeof(FileResult));
+            Assert.IsNotNull(result_NotNull);
+            Assert.IsNull(result_IsNull);
+        }
     }
 }

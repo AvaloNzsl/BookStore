@@ -35,5 +35,8 @@ namespace BookStore.Model
         [Required]
         [Range(0.01, double.MaxValue, ErrorMessage = "Please, enter a positive Integer value")]
         public decimal Price { get; set; }
+
+        public byte[] ImageData { get; set; }
+        public string ImageMimeType { get; set; }
     }
 }

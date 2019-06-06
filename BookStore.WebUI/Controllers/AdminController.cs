@@ -44,6 +44,12 @@ namespace BookStore.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (image != null)
+                {
+                    bookDto.ImageMimeType = image.ContentType;
+                    bookDto.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(bookDto.ImageData, 0, image.ContentLength);
+                }
                 _bookRepository.SaveBook(bookDto);
                 TempData["message"] = string.Format("Changes about book information \"{0}\" saved", bookDto.Name);
                 return RedirectToAction("AdminPanel");

@@ -47,5 +47,24 @@ namespace BookStore.WebUI.Controllers
         }
 
 
+
+
+        public FileContentResult GetImage(int bookId)
+        {
+            BookDTO _bookDto = _bookRepository.Books.Where(b => b.BookId == bookId).FirstOrDefault();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();
+            var bookModel = mapper.Map<BookDTO, Book>(_bookDto);
+
+            if (bookModel != null)
+            {
+                return File(bookModel.ImageData, bookModel.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
     }
 }

@@ -40,6 +40,8 @@ namespace BookStore.BusinessLogic
                     dbEntry.Description = bookDB.Description;
                     dbEntry.Genre = bookDB.Genre;
                     dbEntry.Price = bookDB.Price;
+                    dbEntry.ImageData = bookDB.ImageData;
+                    dbEntry.ImageMimeType = bookDB.ImageMimeType;
                 }
             }
             Save();
