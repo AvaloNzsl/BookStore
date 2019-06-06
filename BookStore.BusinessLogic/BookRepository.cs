@@ -10,6 +10,7 @@ namespace BookStore.BusinessLogic
     public class BookRepository : IBookRepository
     {
         private Book _bookDB = new Book();
+        private BookDTO _bookDto = new BookDTO();
         EFBookStoreContext _bsContext = new EFBookStoreContext();
 
         public IEnumerable<BookDTO> Books
@@ -21,17 +22,7 @@ namespace BookStore.BusinessLogic
             }
         }
 
-        public void AddBook(BookDTO book)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void DeleteBook(int bookId)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void EditBook(BookDTO book)
+        public void SaveBook(BookDTO book)
         {
             var bookDB = MapConfig(book);
 
@@ -51,17 +42,30 @@ namespace BookStore.BusinessLogic
                     dbEntry.Price = bookDB.Price;
                 }
             }
+            Save();
         }
 
-        public BookDTO GetBookById(int bookId)
+        public BookDTO DeleteBook(int bookId)
         {
-            throw new System.NotImplementedException();
+            Book deleteBook = _bsContext.Books.Find(bookId);
+            if (deleteBook != null)
+            {
+                _bsContext.Books.Remove(deleteBook);
+            }
+            var bookDto = MapConfigReverse(deleteBook);
+
+            return bookDto;
         }
 
         public Book MapConfig(BookDTO _bookDto)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();
             return _bookDB = mapper.Map<BookDTO, Book>(_bookDto);
+        }
+        public BookDTO MapConfigReverse(Book _book)
+        {
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Book, BookDTO>()).CreateMapper();
+            return _bookDto = mapper.Map<Book, BookDTO>(_book);
         }
 
         public void Save()

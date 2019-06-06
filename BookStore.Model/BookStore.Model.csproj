@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountLogin.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="BooksListViewModel.cs" />
     <Compile Include="CartViewModel.cs" />

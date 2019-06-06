@@ -9,7 +9,8 @@
         <h2>Editing a book @Model.Name</h2>
     </div>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit", "Admin",
+        FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <div class="panel-body">
             @Html.HiddenFor(m => m.BookId)
@@ -35,7 +36,7 @@
 
 
         <div class="panel-footer">
-            <input type="submit" value="Save" class="btn btn-primary"/>
+            <input type="submit" value="Save" class="btn btn-primary" />
             @Html.ActionLink("Cancel", "AdminPanel", null, new { @class = "btn btn-default" })
         </div>
     }

@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace BookStore.WebUI.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         IBookRepository _bookRepository;
@@ -25,21 +26,25 @@ namespace BookStore.WebUI.Controllers
             return View(books);
         }
 
+        public ViewResult Create()
+        {
+            return View("Edit", new Book());
+        }
+
         public ViewResult Edit(int bookId)
         {
             BookDTO _bookDto = _bookRepository.Books.Where(b => b.BookId == bookId).FirstOrDefault();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();
-            var _bookDB = mapper.Map<BookDTO, Book>(_bookDto);
+            var bookModel = mapper.Map<BookDTO, Book>(_bookDto);
 
-            return View(_bookDB);
+            return View(bookModel);
         }
         [HttpPost]
-        public ActionResult Edit(BookDTO bookDto)
+        public ActionResult Edit(BookDTO bookDto, HttpPostedFileBase image = null)
         {
             if (ModelState.IsValid)
             {
-                _bookRepository.EditBook(bookDto);
-                _bookRepository.Save();
+                _bookRepository.SaveBook(bookDto);
                 TempData["message"] = string.Format("Changes about book information \"{0}\" saved", bookDto.Name);
                 return RedirectToAction("AdminPanel");
             }
@@ -47,6 +52,19 @@ namespace BookStore.WebUI.Controllers
             {
                 return View(bookDto);
             }
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int bookId)
+        {
+            BookDTO deletedBook = _bookRepository.DeleteBook(bookId);
+            if (deletedBook != null)
+            {
+                _bookRepository.Save();
+                TempData["message"] = string.Format("Book \"{0}\" has been deleted",
+                    deletedBook.Name);
+            }
+            return RedirectToAction("AdminPanel");
         }
     }
 }
